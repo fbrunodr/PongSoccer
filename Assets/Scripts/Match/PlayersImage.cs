@@ -11,7 +11,7 @@ public class PlayersImage : MonoBehaviour
     void Start()
     {
         string homeImagePath = TeamManager.GetInstance().homeTeam.getImagePath();
-        Debug.Log(homeImagePath);
+        //Debug.Log(homeImagePath);
         string awayImagePath = TeamManager.GetInstance().awayTeam.getImagePath();
 
         Material homeImage = Resources.Load<Material>(homeImagePath);

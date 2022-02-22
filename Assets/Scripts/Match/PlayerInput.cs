@@ -70,9 +70,8 @@ public class PlayerInput : MonoBehaviour
                 if(selectedPlayer != null)
                 {
                     moveSelectedPlayer(touchPosition);
-                    resetSelectedPlayerColor();
+                    resetSelectedPlayer();
                 }
-                selectedPlayer = null;
                 break;
         }
     }
@@ -115,6 +114,12 @@ public class PlayerInput : MonoBehaviour
 
         propertyBlock.SetColor("_Color", newColor);
         selectedPlayer.gameObject.GetComponent<Renderer>().SetPropertyBlock(propertyBlock);
+    }
+
+    public void resetSelectedPlayer()
+    {
+        resetSelectedPlayerColor();
+        selectedPlayer = null;
     }
 
     private void resetSelectedPlayerColor(){

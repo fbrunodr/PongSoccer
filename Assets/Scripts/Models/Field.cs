@@ -1,20 +1,18 @@
+namespace FieldNamespace{
 
-namespace TeamNamespace{
-public class Team
+public class Field
 {
     private string name;
     private string image;
 
-    public Team(){}
-    public Team(string name)
-    {
+    public Field(){}
+    public Field(string name){
         setName(name);
     }
 
-    public void setName(string name)
-    {
+    public void setName(string name){
         this.name = name;
-        image = "Images/Teams/Materials/" + name;
+        image = "Images/Fields/Materials/" + name;
     }
 
     public string getName()
