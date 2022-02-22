@@ -18,13 +18,14 @@ public class CameraFOV : MonoBehaviour
         float height = cameraHeight - fieldHeight;
         // These multipliers are used to make the field of view
         // a bit bigger than normal, so the game looks better
-        float horizontalMultiplier = 1.1F, vertivalMultipler = 1.2F;
-        float minFOVhorizontal = horizontalMultiplier * 2.0F * Mathf.Rad2Deg * Mathf.Atan2(fieldWidth/2, height);
+        float minFOVhorizontal = 2.0F * Mathf.Rad2Deg * Mathf.Atan2(fieldWidth/2, height);
         float minFOVverticalFromHorizontal = Camera.HorizontalToVerticalFieldOfView(minFOVhorizontal, camera.aspect);
-        float minFOVvertical = vertivalMultipler * 2.0F * Mathf.Rad2Deg * Mathf.Atan2(fieldLength/2, height);
+        float cameraDisplacement = camera.transform.position.z;
+        float minFOVvertical = 2.0F * Mathf.Rad2Deg * Mathf.Atan2(fieldLength/2 + cameraDisplacement, height);
 
         float trueMinFOVvertical = Mathf.Max(minFOVverticalFromHorizontal, minFOVvertical);
 
-        camera.fieldOfView = trueMinFOVvertical;
+        float fovMultiplier = 1.025F;
+        camera.fieldOfView = fovMultiplier * trueMinFOVvertical;
     }
 }
