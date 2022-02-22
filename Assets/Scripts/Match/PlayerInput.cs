@@ -118,8 +118,11 @@ public class PlayerInput : MonoBehaviour
 
     public void resetSelectedPlayer()
     {
-        resetSelectedPlayerColor();
-        selectedPlayer = null;
+        if(selectedPlayer != null)
+        {
+            resetSelectedPlayerColor();
+            selectedPlayer = null;
+        }
     }
 
     private void resetSelectedPlayerColor(){
