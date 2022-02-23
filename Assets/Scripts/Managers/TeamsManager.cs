@@ -5,7 +5,8 @@ class TeamManager
     public Team homeTeam;
     public Team awayTeam;
 
-    private TeamManager() {
+    private TeamManager()
+    {
         homeTeam = new Team("Brazil");
         awayTeam = new Team("Argentina");
     }

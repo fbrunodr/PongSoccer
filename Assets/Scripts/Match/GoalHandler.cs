@@ -80,5 +80,9 @@ public class GoalHandler : MonoBehaviour
         }
         ball.transform.position = ballInitialPosition;
         ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        // Reset angular position
+        ball.GetComponent<Rigidbody>().rotation = Quaternion.identity;
+        // Reset angular velocity
+        ball.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
     }
 }

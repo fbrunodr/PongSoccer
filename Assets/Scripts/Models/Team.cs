@@ -1,4 +1,3 @@
-
 namespace TeamNamespace{
 public class Team
 {

@@ -3,7 +3,8 @@ class FieldManager
 {
     public Field field;
 
-    private FieldManager() {
+    private FieldManager()
+    {
         field = new Field("striped_field");
     }
 
