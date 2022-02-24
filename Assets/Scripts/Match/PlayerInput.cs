@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ConstantsNamespace;
 
 public class PlayerInput : MonoBehaviour
 {
@@ -8,8 +9,6 @@ public class PlayerInput : MonoBehaviour
     private Plane planeOfMovement;
     private float selectedTime;
 
-    private float MAX_SPEED = 100;
-    private float MAX_TIME = 0.8F;
     // Start is called before the first frame update
     void Start()
     {
@@ -96,7 +95,7 @@ public class PlayerInput : MonoBehaviour
             Vector3 hitPoint = ray.GetPoint(enter);
             Vector3 velocityDirection = (hitPoint - selectedPlayer.transform.position).normalized;
             float deltaTime = Time.time - selectedTime;
-            float velocityModulus = MAX_SPEED * (Mathf.Min(deltaTime, MAX_TIME) / MAX_TIME);
+            float velocityModulus = GameConstants.MAX_SPEED * (Mathf.Min(deltaTime, GameConstants.MAX_TIME) / GameConstants.MAX_TIME);
             Vector3 newVelocity = velocityModulus * velocityDirection;
             selectedPlayer.GetComponent<Rigidbody>().velocity = newVelocity;
         }
@@ -107,9 +106,9 @@ public class PlayerInput : MonoBehaviour
         float deltaTime = Time.time - selectedTime;
         Color newColor;
         if(selectedPlayer.gameObject.tag == "Keeper")
-            newColor = Color.yellow + (Color.red - Color.yellow) * (Mathf.Min(deltaTime, MAX_TIME) / MAX_TIME);
+            newColor = Color.yellow + (Color.red - Color.yellow) * (Mathf.Min(deltaTime, GameConstants.MAX_TIME) / GameConstants.MAX_TIME);
         else
-            newColor = Color.red * (Mathf.Min(deltaTime, MAX_TIME) / MAX_TIME);
+            newColor = Color.red * (Mathf.Min(deltaTime, GameConstants.MAX_TIME) / GameConstants.MAX_TIME);
 
         propertyBlock.SetColor("_Color", newColor);
         selectedPlayer.gameObject.GetComponent<Renderer>().SetPropertyBlock(propertyBlock);
