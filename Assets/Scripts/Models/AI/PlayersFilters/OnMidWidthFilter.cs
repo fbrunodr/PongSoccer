@@ -11,10 +11,10 @@ public class OnMidWidthFilter : PlayersFilter
 
     public override List<GameObject> filter()
     {
-        OnLeftFilter onLeftFilter = new OnLeftFilter(players, oponents, ball);
+        OnLeftWingFilter onLeftFilter = new OnLeftWingFilter(players, oponents, ball);
         List<GameObject> complement1 = onLeftFilter.filter();
 
-        OnRightFilter onRightFilter = new OnRightFilter(players, oponents, ball);
+        OnRightWingFilter onRightFilter = new OnRightWingFilter(players, oponents, ball);
         List<GameObject> complement2 = onRightFilter.filter();
 
         List<GameObject> filtredPlayers = players.Except(complement1).ToList().Except(complement2).ToList();

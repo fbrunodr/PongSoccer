@@ -16,7 +16,7 @@ public class FarFromOwnGoalFilter : PlayersFilter
         Vector3 ownGoalCenter = FieldDescription.AwayGoalCenter;
         
         List<GameObject> filtredPlayers = new List<GameObject>();
-        foreach(GameObject player in filtredPlayers)
+        foreach(GameObject player in players)
         {
             Vector3 playerPosition = player.transform.position;
             playerPosition.y = 0;  
