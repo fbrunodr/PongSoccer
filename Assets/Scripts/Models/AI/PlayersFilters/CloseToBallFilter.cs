@@ -5,19 +5,21 @@ using UnityEngine;
 
 namespace PlayersFilters
 {
-public class CloseToOwnGoalFilter : PlayersFilter
+public class CloseToBallFilter : PlayersFilter
 {
     private List<GameObject> players;
+    private GameObject ball;
     
-    public CloseToOwnGoalFilter(List<GameObject> players)
+    public CloseToBallFilter(List<GameObject> players, GameObject ball)
     {
         this.players = players;
+        this.ball = ball;
     }
 
     public override List<GameObject> filter()
     {
-        FarFromOwnGoalFilter farFromOwnGoalFilter = new FarFromOwnGoalFilter(players);
-        List<GameObject> complement = farFromOwnGoalFilter.filter();
+        FarFromBallFilter farFromBallFilter = new FarFromBallFilter(players, ball);
+        List<GameObject> complement = farFromBallFilter.filter();
         List<GameObject> filtredPlayers = players.Except(complement).ToList();
         return filtredPlayers;
     }

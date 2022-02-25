@@ -21,10 +21,10 @@ public class TestPlayersFilters : MonoBehaviour
         GameObject ball = GameObject.Find("Ball");
 
         // Choose filter here to test
-        PlayerBallOwnGoalFilter filter = new PlayerBallOwnGoalFilter(players, new List<GameObject>(), ball);
+        CloseToBallFilter filter = new CloseToBallFilter(players, ball);
         List<GameObject> filteredPlayers = filter.filter();
         // See results here   
-        Debug.Log("PlayerBallOwnGoalFilter:");
+        Debug.Log("CloseToBallFilter:");
         foreach(GameObject filteredPlayer in filteredPlayers)
         {
             Debug.Log(filteredPlayer.transform.position);

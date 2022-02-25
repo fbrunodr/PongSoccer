@@ -7,11 +7,18 @@ namespace PlayersFilters
 {
 public class AfterBallFilter : PlayersFilter
 {
-    public AfterBallFilter(List<GameObject> players, List<GameObject> oponents, GameObject ball) : base(players, oponents, ball){}
+    private List<GameObject> players;
+    private GameObject ball;
+    
+    public AfterBallFilter(List<GameObject> players, GameObject ball)
+    {
+        this.players = players;
+        this.ball = ball;
+    }
 
     public override List<GameObject> filter()
     {
-        BeforeBallFilter beforeBallFilter = new BeforeBallFilter(players, oponents, ball);
+        BeforeBallFilter beforeBallFilter = new BeforeBallFilter(players, ball);
         List<GameObject> complement = beforeBallFilter.filter();
         List<GameObject> filtredPlayers = players.Except(complement).ToList();
         return filtredPlayers;

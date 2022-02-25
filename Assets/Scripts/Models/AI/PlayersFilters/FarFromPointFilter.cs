@@ -2,31 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using ConstantsNamespace;
 
 namespace PlayersFilters
 {
-public class FarFromOwnGoalFilter : PlayersFilter
+public class FarFromPointFilter : PlayersFilter
 {
     private List<GameObject> players;
+    private Vector3 point;
+    private float distanceThreshold;
     
-    public FarFromOwnGoalFilter(List<GameObject> players)
+    public FarFromPointFilter(List<GameObject> players, Vector3 point, float distanceThreshold)
     {
         this.players = players;
+        this.point = point;
+        this.distanceThreshold = distanceThreshold;
     }
+
+    public FarFromPointFilter(List<GameObject> players, Vector3 point) : this(players, point, 20){}
 
     public override List<GameObject> filter()
     {
-        float DISTANCE_THRESHOLD = 45;
-        Vector3 ownGoalCenter = FieldDescription.AwayGoalCenter;
-        
         List<GameObject> filtredPlayers = new List<GameObject>();
         foreach(GameObject player in players)
         {
             Vector3 playerPosition = player.transform.position;
             playerPosition.y = 0;  
-            float distanceFromOwnGoalCenter = (playerPosition - ownGoalCenter).magnitude;
-            if(distanceFromOwnGoalCenter > DISTANCE_THRESHOLD)
+            float distanceFromPoint = (playerPosition - point).magnitude;
+            if(distanceFromPoint > distanceThreshold)
                 filtredPlayers.Add(player);
         }
 

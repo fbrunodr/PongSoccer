@@ -7,7 +7,12 @@ namespace PlayersFilters
 {
 public class OnDefenseFilter : PlayersFilter
 {
-    public OnDefenseFilter(List<GameObject> players, List<GameObject> oponents, GameObject ball) : base(players, oponents, ball){}
+    private List<GameObject> players;
+
+    public OnDefenseFilter(List<GameObject> players)
+    {
+        this.players = players;
+    }
 
     public override List<GameObject> filter()
     {

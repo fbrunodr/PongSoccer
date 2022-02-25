@@ -7,7 +7,14 @@ namespace PlayersFilters
 {
 public class BeforeBallFilter : PlayersFilter
 {
-    public BeforeBallFilter(List<GameObject> players, List<GameObject> oponents, GameObject ball) : base(players, oponents, ball){}
+    private List<GameObject> players;
+    private GameObject ball;
+    
+    public BeforeBallFilter(List<GameObject> players, GameObject ball)
+    {
+        this.players = players;
+        this.ball = ball;
+    }
 
     public override List<GameObject> filter()
     {

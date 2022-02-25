@@ -7,7 +7,11 @@ namespace PlayersFilters
 {
 public class OnLeftWingFilter : PlayersFilter
 {
-    public OnLeftWingFilter(List<GameObject> players, List<GameObject> oponents, GameObject ball) : base(players, oponents, ball){}
+    private List<GameObject> players;
+
+    public OnLeftWingFilter(List<GameObject> players){
+        this.players = players;
+    }
 
     public override List<GameObject> filter()
     {

@@ -8,7 +8,14 @@ namespace PlayersFilters
 {
 public class PlayerBallOwnGoalFilter : PlayersFilter
 {
-    public PlayerBallOwnGoalFilter(List<GameObject> players, List<GameObject> oponents, GameObject ball) : base(players, oponents, ball){}
+    private List<GameObject> players;
+    private GameObject ball;
+
+    public PlayerBallOwnGoalFilter(List<GameObject> players, GameObject ball)
+    {
+        this.players = players;
+        this.ball = ball;
+    }
 
     public override List<GameObject> filter()
     {
