@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ConstantsNamespace;
 
 public class GoalHandler : MonoBehaviour
 {
@@ -63,9 +64,9 @@ public class GoalHandler : MonoBehaviour
     // -1 -> away goal
     private int getGoal(){
         Vector3 ballPosition = ball.transform.position;
-        if(ballPosition.z > 86)
+        if(ballPosition.z > FieldDescription.FIELD_LENGTH / 2 + ball.transform.localScale.x)
             return 1;
-        else if(ballPosition.z < -86)
+        else if(ballPosition.z < -(FieldDescription.FIELD_LENGTH / 2 + ball.transform.localScale.x) )
             return -1;
         else
             return 0;

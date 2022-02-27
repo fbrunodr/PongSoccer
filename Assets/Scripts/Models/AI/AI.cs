@@ -9,6 +9,7 @@ public abstract class AI
     protected List<GameObject> players;
     protected List<GameObject> oponents;
     protected GameObject ball;
+
     private float lastMove;
     private float timeToNextMove;
 
@@ -17,6 +18,7 @@ public abstract class AI
         this.players = players;
         this.oponents = oponents;
         this.ball = ball;
+
         lastMove = Time.time;
         timeToNextMove = chooseTimeToNextMove();
     }
@@ -31,8 +33,6 @@ public abstract class AI
         }
     }
 
-    protected abstract float chooseTimeToNextMove();
-
     private bool isReady()
     {
         return Time.time >= lastMove + timeToNextMove;
@@ -40,16 +40,15 @@ public abstract class AI
 
     protected void doMove()
     {
-        GameObject player = choosePlayer();
         float maxSpeed = getMaxSpeed(timeToNextMove);
-        Move move = chooseMove(player, maxSpeed);
+        Move move = chooseMove(maxSpeed);
         move.execute();
     }
 
+    protected abstract float chooseTimeToNextMove();
+
     protected abstract float getMaxSpeed(float timeOfMove);
 
-    protected abstract GameObject choosePlayer();
-
-    protected abstract Move chooseMove(GameObject player, float maxSpeed);
+    protected abstract Move chooseMove(float maxSpeed);
 }
 }

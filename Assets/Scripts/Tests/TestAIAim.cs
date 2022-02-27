@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Aim;
 
+
+// The test is done with one object called "AI"
 public class TestAIAim : MonoBehaviour
 {
     private float lastTestTime;

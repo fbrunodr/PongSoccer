@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ConstantsNamespace;
 
 public class CameraFOV : MonoBehaviour
 {
@@ -16,8 +17,6 @@ public class CameraFOV : MonoBehaviour
 
         float cameraHeight = this.transform.position.y;
         float height = cameraHeight - fieldHeight;
-        // These multipliers are used to make the field of view
-        // a bit bigger than normal, so the game looks better
         float minFOVhorizontal = 2.0F * Mathf.Rad2Deg * Mathf.Atan2(fieldWidth/2, height);
         float minFOVverticalFromHorizontal = Camera.HorizontalToVerticalFieldOfView(minFOVhorizontal, camera.aspect);
         float cameraDisplacement = camera.transform.position.z;
@@ -25,6 +24,7 @@ public class CameraFOV : MonoBehaviour
 
         float trueMinFOVvertical = Mathf.Max(minFOVverticalFromHorizontal, minFOVvertical);
 
+        // the multiplier is used to make the camera look a bit better
         float fovMultiplier = 1.025F;
         camera.fieldOfView = fovMultiplier * trueMinFOVvertical;
     }

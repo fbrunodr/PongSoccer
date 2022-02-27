@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TeamNamespace;
 
-public class PlayersImage : MonoBehaviour
+public class PlayersImages : MonoBehaviour
 {
     private List<GameObject> playersBody;
     private List<GameObject> playersImages;
