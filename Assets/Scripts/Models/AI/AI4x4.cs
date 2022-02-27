@@ -99,7 +99,7 @@ public class AI4x4 : AI
         else
         {
             if(!see.isOnDefense(rightWinger))
-                possibleMoves.Add(new Move(rightWinger, FieldDescription.AWAY_ATTACK_RIGHT, Mathf.Min(30, maxSpeed)));
+                possibleMoves.Add(new Move(rightWinger, FieldDescription.AWAY_DEFENSE_RIGHT, Mathf.Min(30, maxSpeed)));
             if(!see.isOnDefense(leftWinger))
                 possibleMoves.Add(new Move(leftWinger, FieldDescription.AWAY_DEFENSE_LEFT, Mathf.Min(30, maxSpeed)));
             if(!see.isOnDefense(centerBack) && !see.alignedWithBallAndOwnGoal(centerBack))
