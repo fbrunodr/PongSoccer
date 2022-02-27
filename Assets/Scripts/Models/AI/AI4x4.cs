@@ -17,15 +17,15 @@ public class AI4x4 : AI
     {
         Perception see = new Perception(players, oponents, ball);
         if(see.isCloseToOtherGoalArea(ball) && see.ballGoingToOwnGoal())
-            return Random.Range(GameConstants.MAX_TIME*0.25f, GameConstants.MAX_TIME*0.3f);
+            return Random.Range(GameConstants.MAX_TIME*0.4f, GameConstants.MAX_TIME*0.5f);
         else if(see.isCloseToOwnGoalArea(ball))
-            return Random.Range(GameConstants.MAX_TIME*0.15f, GameConstants.MAX_TIME*0.3f);
+            return Random.Range(GameConstants.MAX_TIME*0.25f, GameConstants.MAX_TIME*0.3f);
         else if(see.isOnDefense(ball))
-            return Random.Range(GameConstants.MAX_TIME*0.15f, GameConstants.MAX_TIME*0.5f);
+            return Random.Range(GameConstants.MAX_TIME*0.25f, GameConstants.MAX_TIME*0.5f);
         else if(see.isOnMidLength(ball))
-            return Random.Range(GameConstants.MAX_TIME*0.2f, GameConstants.MAX_TIME*0.8f);
+            return Random.Range(GameConstants.MAX_TIME*0.35f, GameConstants.MAX_TIME*0.8f);
         else
-            return Random.Range(GameConstants.MAX_TIME*0.3f, GameConstants.MAX_TIME*1.0f);
+            return Random.Range(GameConstants.MAX_TIME*0.35f, GameConstants.MAX_TIME*1.0f);
     }
 
     protected override float getMaxSpeed(float timeOfMove)
