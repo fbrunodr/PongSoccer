@@ -3,6 +3,7 @@ public class Team
 {
     private string name;
     private string image;
+    private string material;
 
     public Team(){}
     public Team(string name)
@@ -13,7 +14,8 @@ public class Team
     public void setName(string name)
     {
         this.name = name;
-        image = "Images/Teams/Materials/" + name;
+        image = "Images/Teams/" + name;
+        material = "Images/Teams/Materials/" + name;
     }
 
     public string getName()
@@ -24,6 +26,11 @@ public class Team
     public string getImagePath()
     {
         return image;
+    }
+
+    public string getMaterialPath()
+    {
+        return material;
     }
 }
 }

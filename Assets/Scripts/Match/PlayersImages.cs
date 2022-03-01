@@ -10,12 +10,11 @@ public class PlayersImages : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        string homeImagePath = TeamManager.GetInstance().homeTeam.getImagePath();
-        //Debug.Log(homeImagePath);
-        string awayImagePath = TeamManager.GetInstance().awayTeam.getImagePath();
+        string homeMaterialPath = TeamManager.GetInstance().homeTeam.getMaterialPath();
+        string awayMaterialPath = TeamManager.GetInstance().awayTeam.getMaterialPath();
 
-        Material homeImage = Resources.Load<Material>(homeImagePath);
-        Material awayImage = Resources.Load<Material>(awayImagePath);
+        Material homeMaterial = Resources.Load<Material>(homeMaterialPath);
+        Material awayMaterial = Resources.Load<Material>(awayMaterialPath);
 
         playersBody = new List<GameObject>();
         playersImages = new List<GameObject>();
@@ -30,14 +29,14 @@ public class PlayersImages : MonoBehaviour
             playersBody.Add(playerBody);
             GameObject playerImage = player.transform.Find("Image").gameObject;
             playersImages.Add(playerImage);
-            playerImage.GetComponent<Renderer>().material = homeImage;
+            playerImage.GetComponent<Renderer>().material = homeMaterial;
 
             player = GameObject.Find("Away" + i.ToString());
             playerBody = player.transform.Find("Body").gameObject;
             playersBody.Add(playerBody);
             playerImage = player.transform.Find("Image").gameObject;
             playersImages.Add(playerImage);
-            playerImage.GetComponent<Renderer>().material = awayImage;
+            playerImage.GetComponent<Renderer>().material = awayMaterial;
         }
     }
 

@@ -86,4 +86,14 @@ public class GoalHandler : MonoBehaviour
         // Reset angular velocity
         ball.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
     }
+
+    public int getHomeGoals()
+    {
+        return homeGoals;
+    }
+
+    public int getAwayGoals()
+    {
+        return awayGoals;
+    }
 }
