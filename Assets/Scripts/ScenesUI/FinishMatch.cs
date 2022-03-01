@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+public class FinishMatch : MonoBehaviour
 {
-    public void gotoPlayMenu()
+    public void gotoAfterMatch()
     {
-        SceneManager.LoadScene("StandardMatch");
+        SceneManager.LoadScene("MainMenu");
     }
 }

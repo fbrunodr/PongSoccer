@@ -14,13 +14,11 @@ public class HandleEnd : MonoBehaviour
     TimeHandler timeHandler;
 
     GameObject endGamePanel;
-    Button continueButton;
 
     // Start is called before the first frame update
     void Start()
     {
         endGamePanel = GameObject.Find("EndGamePanel");
-        continueButton = endGamePanel.transform.Find("Continue").gameObject.GetComponent<Button>();
         endGamePanel.SetActive(false);
         Time.timeScale = 1;
         mode = WinCondition.GetInstance().mode;
@@ -67,14 +65,5 @@ public class HandleEnd : MonoBehaviour
             endGameText.text = "You Lost";
         else
             endGameText.text = "Draw";
-        continueButton.onClick.AddListener(finish);
-    }
-
-    void finish()
-    {
-        //continueButton.interactable = false;
-        continueButton.onClick.RemoveListener(finish);
-        SceneManager.LoadSceneAsync("MainMenu");
-        SceneManager.UnloadSceneAsync("StandardMatch");
     }
 }
