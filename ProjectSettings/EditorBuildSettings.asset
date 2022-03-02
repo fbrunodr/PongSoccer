@@ -8,9 +8,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/PlayMenu.unity
     guid: 0886eba69979a5346ac2a74688008977
+  - enabled: 1
+    path: Assets/Scenes/QuickMatch.unity
+    guid: 7a10812a8a724384caa9f492f95cce89
   - enabled: 1
     path: Assets/Scenes/StandardMatch.unity
     guid: b8b06ef73c122d643ae0f74b014fb5a0

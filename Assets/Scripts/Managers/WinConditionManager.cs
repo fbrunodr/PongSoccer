@@ -7,7 +7,7 @@ class WinCondition
 
     private WinCondition()
     {
-        mode = "Goal";
+        mode = "Time";
         goalsToWin = 3;
         timeToEnd = 15;
     }

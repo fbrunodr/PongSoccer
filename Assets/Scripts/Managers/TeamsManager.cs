@@ -7,8 +7,8 @@ class TeamManager
 
     private TeamManager()
     {
-        homeTeam = new Team("Brazil");
-        awayTeam = new Team("Argentina");
+        homeTeam = null;
+        awayTeam = null;
     }
 
     private static TeamManager _instance;

@@ -1,3 +1,5 @@
+using System;
+
 namespace TeamNamespace{
 public class Team
 {
@@ -32,5 +34,16 @@ public class Team
     {
         return material;
     }
+
+   public override bool Equals(Object obj)
+   {
+        //Check for null and compare run-time types.
+        if ((obj == null) || ! this.GetType().Equals(obj.GetType()))
+            return false;
+        else {
+            Team team = (Team) obj;
+            return getName() == team.getName();
+        }
+   }
 }
 }
