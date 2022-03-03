@@ -40,7 +40,7 @@ public class HandleEnd : MonoBehaviour
             if(goalDiff != 0)
                 end(goalDiff);
         }
-        else if(mode == "Goal")
+        else if(mode == "Goals")
         {
             int homeGoals = goalHandler.getHomeGoals();
             int awayGoals = goalHandler.getAwayGoals();

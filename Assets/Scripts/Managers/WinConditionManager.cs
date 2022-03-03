@@ -9,7 +9,7 @@ class WinCondition
     {
         mode = "Time";
         goalsToWin = 3;
-        timeToEnd = 15;
+        timeToEnd = 60;
     }
 
     private static WinCondition _instance;

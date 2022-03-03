@@ -23,6 +23,13 @@ public class SettingsUI : MonoBehaviour
         SceneManager.LoadScene("ChooseField", LoadSceneMode.Additive);
     }
 
+    public void loadSetWinCondition()
+    {
+        audioListener.enabled = false;
+        eventSystem.enabled = false;
+        SceneManager.LoadScene("SetWinCondition", LoadSceneMode.Additive);
+    }
+
     public void gotoMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
