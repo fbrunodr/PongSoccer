@@ -38,10 +38,17 @@ public class ChooseFieldUI : MonoBehaviour
     {
         FieldManager.GetInstance().field = chosenField;
         SceneManager.UnloadSceneAsync("ChooseField");
+        makeSettingsIteractiveAgain();
     }
 
     public void cancel()
     {
-        SceneManager.UnloadSceneAsync("ChooseField");
+        SceneManager.UnloadSceneAsync("ChooseField") ;
+        makeSettingsIteractiveAgain();
+    }
+
+    private void makeSettingsIteractiveAgain()
+    {
+        GameObject.Find("Canvas").GetComponent<SettingsUI>().enableSystemsBack();
     }
 }

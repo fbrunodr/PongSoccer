@@ -8,6 +8,6 @@ public class SelectField : MonoBehaviour
     public void selectField()
     {
         Field field = new Field(this.name);
-        GameObject.Find("Canvas").GetComponent<ChooseFieldUI>().selectField(field);
+        GameObject.Find("ChooseFieldCanvas").GetComponent<ChooseFieldUI>().selectField(field);
     }
 }
