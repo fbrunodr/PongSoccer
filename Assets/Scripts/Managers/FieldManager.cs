@@ -5,7 +5,7 @@ class FieldManager
 
     private FieldManager()
     {
-        field = new Field("striped_field");
+        field = new Field("neighborhood_field");
     }
 
     private static FieldManager _instance;

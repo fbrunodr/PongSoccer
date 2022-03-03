@@ -7,6 +7,7 @@ TagManager:
   - Keeper
   - homeTeam
   - awayTeam
+  - choiceObj
   layers:
   - Default
   - TransparentFX

@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GoToQuickPlay : MonoBehaviour
+public class PlayMenuUI : MonoBehaviour
 {
-    public void gotoQuickPlay()
+    public void gotoQuickMatch()
     {
         SceneManager.LoadScene("QuickMatch");
+    }
+
+    public void gotoMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }
