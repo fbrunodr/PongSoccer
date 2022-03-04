@@ -49,15 +49,27 @@ public class SetWinConditionUI : MonoBehaviour
 
         if(mode == "Goals")
         {
-            durations[0].transform.GetChild(1).GetComponent<Text>().text = "2 Goals";
-            durations[1].transform.GetChild(1).GetComponent<Text>().text = "3 Goals";
-            durations[2].transform.GetChild(1).GetComponent<Text>().text = "5 Goals";
+            foreach(GameObject duration in durations)
+            {
+                if(duration.name == "Short")
+                    duration.transform.GetChild(1).GetComponent<Text>().text = "2 Goals";
+                else if(duration.name == "Medium")
+                    duration.transform.GetChild(1).GetComponent<Text>().text = "3 Goals";
+                else if(duration.name == "Long")
+                    duration.transform.GetChild(1).GetComponent<Text>().text = "5 Goals";
+            }
         }
         else
         {
-            durations[0].transform.GetChild(1).GetComponent<Text>().text = "1 min";
-            durations[1].transform.GetChild(1).GetComponent<Text>().text = "2 min";
-            durations[2].transform.GetChild(1).GetComponent<Text>().text = "3 min";
+            foreach(GameObject duration in durations)
+            {
+                if(duration.name == "Short")
+                    duration.transform.GetChild(1).GetComponent<Text>().text = "1 min";
+                else if(duration.name == "Medium")
+                    duration.transform.GetChild(1).GetComponent<Text>().text = "2 min";
+                else if(duration.name == "Long")
+                    duration.transform.GetChild(1).GetComponent<Text>().text = "3 min";
+            }
         }
 
         foreach(GameObject modeObj in modes)
