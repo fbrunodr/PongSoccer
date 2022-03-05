@@ -10,8 +10,8 @@ using Moves;
 namespace AInamespace{
 public class AI4x4 : AI
 {
-    public AI4x4(List<GameObject> players, List<GameObject> oponents, GameObject ball) :
-    base(players, oponents, ball){}
+    public AI4x4(List<GameObject> players, List<GameObject> oponents, GameObject ball, int difficult) :
+    base(players, oponents, ball, difficult){}
 
     protected override float chooseTimeToNextMove()
     {

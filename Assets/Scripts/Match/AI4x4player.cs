@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using AInamespace;
+using DifficutiesNamespace;
+using TeamNamespace;
 
 public class AI4x4player : MonoBehaviour
 {
@@ -31,7 +33,10 @@ public class AI4x4player : MonoBehaviour
 
         GameObject ball = GameObject.Find("Ball");
 
-        ai = new AI4x4(players, oponents, ball);
+        string aiTeamName = TeamManager.GetInstance().awayTeam.getName();
+        int aiTeamDifficult = DifficutiesManager.GetInstance().difficulties[aiTeamName];
+        
+        ai = new AI4x4(players, oponents, ball, aiTeamDifficult);
     }
 
     // Update is called once per frame

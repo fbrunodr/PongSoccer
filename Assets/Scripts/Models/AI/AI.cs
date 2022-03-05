@@ -6,6 +6,8 @@ using Moves;
 namespace AInamespace{
 public abstract class AI
 {
+    int difficult;
+
     protected List<GameObject> players;
     protected List<GameObject> oponents;
     protected GameObject ball;
@@ -13,11 +15,12 @@ public abstract class AI
     private float lastMove;
     private float timeToNextMove;
 
-    protected AI(List<GameObject> players, List<GameObject> oponents, GameObject ball)
+    protected AI(List<GameObject> players, List<GameObject> oponents, GameObject ball, int difficult)
     {
         this.players = players;
         this.oponents = oponents;
         this.ball = ball;
+        this.difficult = difficult;
 
         lastMove = Time.time;
         timeToNextMove = chooseTimeToNextMove();

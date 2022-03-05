@@ -35,6 +35,11 @@ public class SettingsUI : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
+    public void gotoSetTeamsQuality()
+    {
+        SceneManager.LoadScene("SetTeamsQuality");
+    }
+
     public void enableSystemsBack()
     {
         audioListener.enabled = true;
