@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Settings/SetWinCondition.unity
     guid: 4b18e1bcb79df954a93a23459c277c29
+  - enabled: 1
+    path: Assets/Scenes/Settings/SetTeamsQuality.unity
+    guid: 7702948a0aa3f424a8e5932212c69e29
   m_configObjects: {}

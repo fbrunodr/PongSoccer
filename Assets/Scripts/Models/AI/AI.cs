@@ -6,7 +6,7 @@ using Moves;
 namespace AInamespace{
 public abstract class AI
 {
-    int difficult;
+    protected int difficult;
 
     protected List<GameObject> players;
     protected List<GameObject> oponents;

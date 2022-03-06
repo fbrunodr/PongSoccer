@@ -14,7 +14,10 @@ public class ChooseFieldUI : MonoBehaviour
     void Start()
     {
         fields = new List<GameObject>(GameObject.FindGameObjectsWithTag("choiceObj"));
-        selectField(FieldManager.GetInstance().field);
+        Field currentField = FieldManager.GetInstance().field;
+        selectField(currentField);
+        string currentTime = FieldManager.GetInstance().time;
+        setTime(currentTime);
     }
 
     public void selectField(Field field)
@@ -34,9 +37,30 @@ public class ChooseFieldUI : MonoBehaviour
         chosenField = field;
     }
 
+    public string getTime()
+    {
+        GameObject chooseTime = GameObject.Find("ChooseTime");
+        foreach(Transform child in chooseTime.transform)
+            if(child.gameObject.GetComponent<Toggle>().isOn)
+                return child.name;
+        return "Noon";
+    }
+
+    public void setTime(string currentTime)
+    {
+        GameObject chooseTime = GameObject.Find("ChooseTime");
+        foreach(Transform child in chooseTime.transform)
+            if(child.name == currentTime)
+            {
+                child.gameObject.GetComponent<Toggle>().isOn = true;
+                return;
+            }
+    }
+
     public void save()
     {
         FieldManager.GetInstance().field = chosenField;
+        FieldManager.GetInstance().time = getTime();
         SceneManager.UnloadSceneAsync("ChooseField");
         makeSettingsIteractiveAgain();
     }
