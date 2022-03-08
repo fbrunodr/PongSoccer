@@ -10,6 +10,11 @@ public class PlayMenuUI : MonoBehaviour
         SceneManager.LoadScene("QuickMatch");
     }
 
+    public void gotoTournament()
+    {
+        SceneManager.LoadScene("Tournament");
+    }
+
     public void gotoMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
