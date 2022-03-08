@@ -47,6 +47,10 @@ public class SetWinConditionUI : MonoBehaviour
         if(chosenMode != null && mode == chosenMode)
             return;
 
+        chosenMode = mode;
+
+        //Debug.Log("Here Mode");
+
         if(mode == "Goals")
         {
             foreach(GameObject duration in durations)
@@ -79,7 +83,6 @@ public class SetWinConditionUI : MonoBehaviour
             else
                 modeObj.GetComponent<Toggle>().isOn = true;
         }
-        chosenMode = mode;
     }
 
     public void selectDuration(string duration)
@@ -88,6 +91,10 @@ public class SetWinConditionUI : MonoBehaviour
             return;
         if(chosenDuration != null && duration == chosenDuration)
             return;
+            
+        chosenDuration = duration;
+
+        //Debug.Log("Here Duration");
 
         foreach(GameObject durationObj in durations)
         {
@@ -96,7 +103,6 @@ public class SetWinConditionUI : MonoBehaviour
             else
                 durationObj.GetComponent<Toggle>().isOn = true;
         }
-        chosenDuration = duration;
     }
 
     public void save()
