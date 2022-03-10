@@ -29,4 +29,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Settings/SetTeamsQuality.unity
     guid: 7702948a0aa3f424a8e5932212c69e29
+  - enabled: 1
+    path: Assets/Scenes/PlayMenu/Tournament/Tournament.unity
+    guid: d0b11238ce0d8e742aaa7c4166600234
+  - enabled: 1
+    path: Assets/Scenes/PlayMenu/Tournament/ChooseField.unity
+    guid: 8f2544f2dedabfb4c94dbc220a689523
+  - enabled: 1
+    path: Assets/Scenes/PlayMenu/Tournament/SetWinCondition.unity
+    guid: 74d57ad868f295746a3e53866965bee0
+  - enabled: 1
+    path: Assets/Scenes/PlayMenu/Tournament/ChooseTeam.unity
+    guid: dabb637163fe1d149b4ce28dda2fec7c
+  - enabled: 1
+    path: Assets/Scenes/PlayMenu/Tournament/CreateTournament.unity
+    guid: bd0afffd89ccb3547965aa5c4a71d2f7
   m_configObjects: {}

@@ -12,13 +12,13 @@ Cameroon 3
 Canada 1
 Chile 4
 China 1
-Colombia 3
+Colombia 4
 Congo 1
 Costa_Rica 3
 Croacia 4
 Cuba 1
 Czech_Republic 4
-Denmark 3
+Denmark 4
 Ecuador 3
 Egypt 1
 El_Salvador 1
@@ -50,7 +50,7 @@ North_Korea 1
 Northern_Ireland 3
 Norway 2
 Panama 1
-Paraguay 3
+Paraguay 4
 Peru 3
 Poland 4
 Portugal 4
