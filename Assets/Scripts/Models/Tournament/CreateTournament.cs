@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TournamentNamespace;
 
 public class CreateTournament : MonoBehaviour
@@ -9,6 +10,7 @@ public class CreateTournament : MonoBehaviour
     void Start()
     {
         TournamentManager.GetInstance().CreateTournament();
+        SceneManager.LoadScene("Groups");
     }
 
 }

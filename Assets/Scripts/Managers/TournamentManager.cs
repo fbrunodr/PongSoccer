@@ -51,13 +51,21 @@ public class TournamentManager
         teamsOrderedByDifficulties = 
         teamsOrderedByDifficulties.OrderByDescending(team => difficulties[team]).ToList();
 
+        List<List<int>> shuffledIdx = new List<List<int>>();
+        for(int i = 0; i < 8; i++)
+        {
+            shuffledIdx.Add(new List<int>(){0, 1, 2, 3});
+            shuffledIdx[i] = 
+            shuffledIdx[i].OrderBy(idx => Random.value).ToList();
+        }
+
         teamsDataOnGroupPhase.Clear();
         // First eight teams each go to their own group
         // their index is 0 on their group
         for(int i = 0; i < 8; i++)
         {
             teamsDataOnGroupPhase.Add(
-                ((char)('a' + i), 0),
+                ((char)('A' + i), shuffledIdx[i][0]),
                 new TeamDataOnGroupPhase( new Team(teamsOrderedByDifficulties[i]) )
             );
         }
@@ -68,7 +76,7 @@ public class TournamentManager
         for(int i = 0; i < 8; i++)
         {
             teamsDataOnGroupPhase.Add(
-                ((char)('a' + i), 1),
+                ((char)('A' + i), shuffledIdx[i][1]),
                 new TeamDataOnGroupPhase( new Team(teamsOrderedByDifficulties[i + 9]) )
             );
         }
@@ -77,7 +85,7 @@ public class TournamentManager
         for(int i = 0; i < 8; i++)
         {
             teamsDataOnGroupPhase.Add(
-                ((char)('a' + i), 2),
+                ((char)('A' + i), shuffledIdx[i][2]),
                 new TeamDataOnGroupPhase( new Team(teamsOrderedByDifficulties[i + 25]) )
             );
         }
@@ -87,7 +95,7 @@ public class TournamentManager
         for(int i = 0; i < 8; i ++)
         {
             teamsDataOnGroupPhase.Add(
-                ((char)('a' + i), 3),
+                ((char)('A' + i), shuffledIdx[i][3]),
                 new TeamDataOnGroupPhase( new Team(teamsOrderedByDifficulties[2*i + 49]) )
             );
         }
@@ -105,14 +113,14 @@ public class TournamentManager
 
         if(!playerTeamHasBeenSelected)
         {
-            char randomGroup = ((char)('a' + Random.Range(0, 8)));
+            char randomGroup = ((char)('A' + Random.Range(0, 8)));
             teamsDataOnGroupPhase[(randomGroup, 2)].team = playerTeam;
         }
 
         Debug.Log(tournamentDirectory);
         saveTournamentSettings();
         saveTournamentDifficulties();
-        // save teams group data (group data)
+        saveGroupsData();
     }
 
     public void createTournamentDirectoryIfNone()
@@ -154,6 +162,29 @@ public class TournamentManager
         tournamentDifficultiesData = tournamentDifficultiesData.Remove(tournamentDifficultiesData.Length - 1);
 
         File.WriteAllText(tournamentDifficultiesPath, tournamentDifficultiesData);
+    }
+
+    public void saveGroupsData()
+    {
+        createTournamentDirectoryIfNone();
+
+        string tournamentGroupsPath = Path.Combine(tournamentDirectory, "groups.txt");
+        string tournamentGroupsData = "";
+
+        foreach(KeyValuePair<(char, int), TeamDataOnGroupPhase> teamDataOnGroupPhase in teamsDataOnGroupPhase)
+        {
+            string group = teamDataOnGroupPhase.Key.Item1.ToString();
+            string idx = teamDataOnGroupPhase.Key.Item2.ToString();
+            TeamDataOnGroupPhase data = teamDataOnGroupPhase.Value;
+            tournamentGroupsData += 
+            group + " " + idx + " " + data.team.getName() + " " + data.points + " " + data.matchesPlayed + " " +
+            data.wins + " " + data.draws + " " + data.losses + " " +
+            data.goalsFor + " " + data.goalsAgainst + " " + data.goalDifference + '\n';
+        }
+        // remove trailing end of line
+        tournamentGroupsData = tournamentGroupsData.Remove(tournamentGroupsData.Length - 1);
+
+        File.WriteAllText(tournamentGroupsPath, tournamentGroupsData);
     }
 
     private static TournamentManager _instance;
