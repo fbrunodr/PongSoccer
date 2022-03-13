@@ -8,6 +8,9 @@ using TournamentNamespace;
 
 public class GroupUI : MonoBehaviour
 {
+
+    SortedDictionary<char, List<TeamDataOnGroupPhase> > teamsSorted;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +31,8 @@ public class GroupUI : MonoBehaviour
                 team => (team.points, team.goalDifference, team.goalsFor, team.wins,
                 TournamentManager.GetInstance().difficulties[team.team.getName()], team.team.getName() )
             ).ToList();
+
+            teamsSorted.Add(letter, teamsOfThisGroup);
 
             for(int i = 3; i < 7; i++)
             {
