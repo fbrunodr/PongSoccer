@@ -14,6 +14,8 @@ public class GroupUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        teamsSorted = new SortedDictionary<char, List<TeamDataOnGroupPhase>>();
+
         GameObject content = GameObject.Find("Content");
         foreach(Transform group in content.transform)
         {
