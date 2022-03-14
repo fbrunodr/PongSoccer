@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TournamentNamespace;
+using WinConditionNamespace;
 
 public class SetTournamentWinConditionUI : MonoBehaviour
 {
@@ -15,9 +16,9 @@ public class SetTournamentWinConditionUI : MonoBehaviour
     {
         modes = new List<GameObject>(GameObject.FindGameObjectsWithTag("choiceObj"));
         durations = new List<GameObject>(GameObject.FindGameObjectsWithTag("choiceObj2"));
-        string mode = TournamentManager.GetInstance().mode;
+        WinCondition.Mode mode = TournamentManager.GetInstance().mode;
         selectMode(mode);
-        if(mode == "Goals")
+        if(mode == WinCondition.Mode.Goals)
         {
             int goalsToWin = TournamentManager.GetInstance().goalsToWin;
             if(goalsToWin == 2)
@@ -39,16 +40,13 @@ public class SetTournamentWinConditionUI : MonoBehaviour
         }
     }
 
-    public void selectMode(string mode)
+    public void selectMode(WinCondition.Mode mode)
     {
-        if(mode == null)
-            return;
-
         TournamentManager.GetInstance().mode = mode;
 
         //Debug.Log("Here Mode");
 
-        if(mode == "Goals")
+        if(mode == WinCondition.Mode.Goals)
         {
             foreach(GameObject duration in durations)
             {
@@ -75,7 +73,7 @@ public class SetTournamentWinConditionUI : MonoBehaviour
 
         foreach(GameObject modeObj in modes)
         {
-            if(modeObj.name != mode)
+            if(modeObj.name != WinCondition.modeToString(mode))
                 modeObj.GetComponent<Toggle>().isOn = false;
             else
                 modeObj.GetComponent<Toggle>().isOn = true;

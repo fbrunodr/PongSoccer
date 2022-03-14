@@ -9,7 +9,7 @@ using WinConditionNamespace;
 public class HandleEnd : MonoBehaviour
 {
 
-    string mode;
+    WinCondition.Mode mode;
     GoalHandler goalHandler;
     TimeHandler timeHandler;
 
@@ -21,7 +21,7 @@ public class HandleEnd : MonoBehaviour
         endGamePanel = GameObject.Find("EndGamePanel");
         endGamePanel.SetActive(false);
         Time.timeScale = 1;
-        mode = WinCondition.GetInstance().mode;
+        mode = WinConditionManager.GetInstance().mode;
         goalHandler = GameObject.Find("Game").GetComponent<GoalHandler>();
         timeHandler = GameObject.Find("Game").GetComponent<TimeHandler>();
     }
@@ -29,22 +29,22 @@ public class HandleEnd : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(mode == "Time" && timeHandler.getSeconds() < 0)
+        if(mode == WinCondition.Mode.Time && timeHandler.getSeconds() < 0)
         {
             int goalDiff = goalHandler.getHomeGoals() - goalHandler.getAwayGoals();
             end(goalDiff);
         }
-        else if(mode == "Time and golden goal" && timeHandler.getSeconds() < 0)
+        else if(mode == WinCondition.Mode.TimeAndGoldenGoal && timeHandler.getSeconds() < 0)
         {
             int goalDiff = goalHandler.getHomeGoals() - goalHandler.getAwayGoals();
             if(goalDiff != 0)
                 end(goalDiff);
         }
-        else if(mode == "Goals")
+        else if(mode == WinCondition.Mode.Goals)
         {
             int homeGoals = goalHandler.getHomeGoals();
             int awayGoals = goalHandler.getAwayGoals();
-            int goalsToWin = WinCondition.GetInstance().goalsToWin;
+            int goalsToWin = WinConditionManager.GetInstance().goalsToWin;
             if(homeGoals == goalsToWin || awayGoals == goalsToWin)
             {
                 int goalDiff = homeGoals - awayGoals;

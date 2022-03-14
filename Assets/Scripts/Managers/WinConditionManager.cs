@@ -1,22 +1,22 @@
 namespace WinConditionNamespace{
-class WinCondition
+class WinConditionManager
 {
-    public string mode;
+    public WinCondition.Mode mode;
     public int goalsToWin;
     public int timeToEnd;
 
-    private WinCondition()
+    private WinConditionManager()
     {
-        mode = "Time";
+        mode = WinCondition.Mode.Time;
         goalsToWin = 3;
         timeToEnd = 60;
     }
 
-    private static WinCondition _instance;
+    private static WinConditionManager _instance;
 
     private static readonly object _lock = new object();
 
-    public static WinCondition GetInstance()
+    public static WinConditionManager GetInstance()
     {
         if (_instance == null)
         {
@@ -24,7 +24,7 @@ class WinCondition
             {
                 if (_instance == null)
                 {
-                    _instance = new WinCondition();
+                    _instance = new WinConditionManager();
                 }
             }
         }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using WinConditionNamespace;
 
 public class SelectTournamentWinCondition : MonoBehaviour
 {
@@ -9,9 +10,11 @@ public class SelectTournamentWinCondition : MonoBehaviour
     {
         if(!this.GetComponent<Toggle>().isOn)
             return;
-        string mode = this.name;
+        string modeName = this.name;
+        WinCondition.Mode mode = WinCondition.stringToMode(modeName);
         GameObject.Find("Canvas").GetComponent<SetTournamentWinConditionUI>().selectMode(mode);
     }
+
     public void selectDuration()
     {
         if(!this.GetComponent<Toggle>().isOn)

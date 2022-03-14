@@ -44,7 +44,7 @@ public class MatchUI : MonoBehaviour
     void updateTimer()
     {
         int seconds = (int)timeHandler.getSeconds();
-        if(timeHandler.getSeconds() < 0 && WinCondition.GetInstance().mode == "Time and golden goal")
+        if(timeHandler.getSeconds() < 0 && WinConditionManager.GetInstance().mode == WinCondition.Mode.TimeAndGoldenGoal)
         {
             seconds *= -1;
             Color newColor = Color.yellow;

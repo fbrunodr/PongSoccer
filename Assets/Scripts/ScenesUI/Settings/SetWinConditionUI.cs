@@ -10,17 +10,17 @@ public class SetWinConditionUI : MonoBehaviour
 
     List<GameObject> modes;
     List<GameObject> durations;
-    string chosenMode;
+    WinCondition.Mode chosenMode;
     string chosenDuration;
 
     void Start()
     {
         modes = new List<GameObject>(GameObject.FindGameObjectsWithTag("choiceObj"));
         durations = new List<GameObject>(GameObject.FindGameObjectsWithTag("choiceObj2"));
-        selectMode(WinCondition.GetInstance().mode);
-        if(chosenMode == "Goals")
+        selectMode(WinConditionManager.GetInstance().mode);
+        if(chosenMode == WinCondition.Mode.Goals)
         {
-            int goalsToWin = WinCondition.GetInstance().goalsToWin;
+            int goalsToWin = WinConditionManager.GetInstance().goalsToWin;
             if(goalsToWin == 2)
                 selectDuration("Short");
             else if(goalsToWin == 3)
@@ -30,7 +30,7 @@ public class SetWinConditionUI : MonoBehaviour
         }
         else
         {
-            int timeToEnd = WinCondition.GetInstance().timeToEnd;
+            int timeToEnd = WinConditionManager.GetInstance().timeToEnd;
             if(timeToEnd == 60)
                 selectDuration("Short");
             else if(timeToEnd == 120)
@@ -40,18 +40,13 @@ public class SetWinConditionUI : MonoBehaviour
         }
     }
 
-    public void selectMode(string mode)
+    public void selectMode(WinCondition.Mode mode)
     {
-        if(mode == null)
-            return;
-        if(chosenMode != null && mode == chosenMode)
-            return;
-
         chosenMode = mode;
 
         //Debug.Log("Here Mode");
 
-        if(mode == "Goals")
+        if(mode == WinCondition.Mode.Goals)
         {
             foreach(GameObject duration in durations)
             {
@@ -78,7 +73,7 @@ public class SetWinConditionUI : MonoBehaviour
 
         foreach(GameObject modeObj in modes)
         {
-            if(modeObj.name != mode)
+            if(modeObj.name != WinCondition.modeToString(mode))
                 modeObj.GetComponent<Toggle>().isOn = false;
             else
                 modeObj.GetComponent<Toggle>().isOn = true;
@@ -107,24 +102,24 @@ public class SetWinConditionUI : MonoBehaviour
 
     public void save()
     {
-        WinCondition.GetInstance().mode = chosenMode;
-        if(chosenMode == "Goals")
+        WinConditionManager.GetInstance().mode = chosenMode;
+        if(chosenMode == WinCondition.Mode.Goals)
         {
             if(chosenDuration == "Short")
-                WinCondition.GetInstance().goalsToWin = 2;
+                WinConditionManager.GetInstance().goalsToWin = 2;
             else if(chosenDuration == "Medium")
-                WinCondition.GetInstance().goalsToWin = 3;
+                WinConditionManager.GetInstance().goalsToWin = 3;
             else if(chosenDuration == "Long")
-                WinCondition.GetInstance().goalsToWin = 5;
+                WinConditionManager.GetInstance().goalsToWin = 5;
         }
         else
         {
             if(chosenDuration == "Short")
-                WinCondition.GetInstance().timeToEnd = 60;
+                WinConditionManager.GetInstance().timeToEnd = 60;
             else if(chosenDuration == "Medium")
-                WinCondition.GetInstance().timeToEnd = 120;
+                WinConditionManager.GetInstance().timeToEnd = 120;
             else if(chosenDuration == "Long")
-                WinCondition.GetInstance().timeToEnd = 180;
+                WinConditionManager.GetInstance().timeToEnd = 180;
         }
 
         SceneManager.UnloadSceneAsync("SetWinCondition");

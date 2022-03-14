@@ -1,19 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using WinConditionNamespace;
 
 public class SimulateMatch
 {
-    public string mode;
+    public WinCondition.Mode mode;
     public int goalsToWin;
     public int timeToEnd;
 
     private const float Q = 1.7f;
 
-    SimulateMatch(string mode, int goalsToWinOrTimeToEnd)
+    SimulateMatch(WinCondition.Mode mode, int goalsToWinOrTimeToEnd)
     {
         this.mode = mode;
-        if(mode == "Goals")
+        if(mode == WinCondition.Mode.Goals)
             goalsToWin = goalsToWinOrTimeToEnd;
         else
             timeToEnd = goalsToWinOrTimeToEnd;
@@ -23,7 +24,7 @@ public class SimulateMatch
     {
         int goalsA = 0, goalsB = 0;
 
-        if(mode == "Goals")
+        if(mode == WinCondition.Mode.Goals)
         {
             while(goalsA < goalsToWin && goalsB < goalsToWin)
             {
@@ -45,7 +46,7 @@ public class SimulateMatch
             }
         }
 
-        if(mode == "Time and golden goal" && goalsA == goalsB)
+        if(mode == WinCondition.Mode.TimeAndGoldenGoal && goalsA == goalsB)
         {
             if(didFirstTeamScored(difficultA, difficultB))
                 goalsA++;

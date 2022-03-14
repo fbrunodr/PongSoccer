@@ -13,11 +13,11 @@ public class TimeHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        string mode = WinCondition.GetInstance().mode;
-        if(mode == "Time" || mode == "Time and golden goal")
+        WinCondition.Mode mode = WinConditionManager.GetInstance().mode;
+        if(mode == WinCondition.Mode.Time || mode == WinCondition.Mode.TimeAndGoldenGoal)
         {
             decrementing = true;
-            seconds = WinCondition.GetInstance().timeToEnd;
+            seconds = WinConditionManager.GetInstance().timeToEnd;
             referenceTime = Time.time + seconds;
         }
         else

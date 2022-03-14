@@ -6,13 +6,14 @@ using UnityEngine;
 using FieldNamespace;
 using TeamNamespace;
 using DifficutiesNamespace;
+using WinConditionNamespace;
 
 namespace TournamentNamespace{
 public class TournamentManager
 {
     public Team playerTeam;
     public Field field;
-    public string mode;
+    public WinCondition.Mode mode;
     public int goalsToWin;
     public int timeToEnd;
     public Dictionary<string, int>  difficulties;
@@ -24,7 +25,7 @@ public class TournamentManager
     {
         playerTeam = null;
         field = new Field("neighborhood_field");
-        mode = "Time";
+        mode = WinCondition.Mode.Time;
         goalsToWin = 2;
         timeToEnd = 60;
         difficulties = new Dictionary<string, int>();
@@ -139,7 +140,7 @@ public class TournamentManager
         string settings = "";
         settings += "playerTeam " + playerTeam.getName() + "\n";
         settings += "field " + field.getName() + "\n";
-        settings += "mode " + mode + "\n";
+        settings += "mode " + WinCondition.modeToString(mode) + "\n";
         settings += "goalsToWin " + goalsToWin.ToString() + "\n";
         settings += "timeToEnd " + timeToEnd.ToString();
         File.WriteAllText(tournamentSettings, settings);
