@@ -44,4 +44,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PlayMenu/Tournament/CreateTournament.unity
     guid: bd0afffd89ccb3547965aa5c4a71d2f7
+  - enabled: 1
+    path: Assets/Scenes/PlayMenu/Tournament/Groups.unity
+    guid: 7cc1eb24a6012fe4596a8bddc0b48b85
   m_configObjects: {}

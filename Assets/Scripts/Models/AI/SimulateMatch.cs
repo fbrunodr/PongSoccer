@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using WinConditionNamespace;
 
+namespace AInamespace
+{
 public class SimulateMatch
 {
     public WinCondition.Mode mode;
@@ -11,7 +13,7 @@ public class SimulateMatch
 
     private const float Q = 1.7f;
 
-    SimulateMatch(WinCondition.Mode mode, int goalsToWinOrTimeToEnd)
+    public SimulateMatch(WinCondition.Mode mode, int goalsToWinOrTimeToEnd)
     {
         this.mode = mode;
         if(mode == WinCondition.Mode.Goals)
@@ -20,7 +22,7 @@ public class SimulateMatch
             timeToEnd = goalsToWinOrTimeToEnd;
     }
 
-    (int, int) simulate(int difficultA, int difficultB)
+    public (int, int) simulate(int difficultA, int difficultB)
     {
         int goalsA = 0, goalsB = 0;
 
@@ -69,4 +71,5 @@ public class SimulateMatch
         float totalRange = aRange + bRange;
         return Random.Range(0,totalRange) < aRange;
     }
+}
 }
