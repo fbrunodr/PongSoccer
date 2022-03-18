@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using WinConditionNamespace;
 using TeamNamespace;
+using GameTypeNamespace;
+using TournamentNamespace;
 
 public class MatchUI : MonoBehaviour
 {
@@ -21,8 +23,21 @@ public class MatchUI : MonoBehaviour
         score = GameObject.Find("Score").GetComponent<Text>();
         timer = GameObject.Find("Time").GetComponent<Text>();
 
-        string homeImagePath = TeamManager.GetInstance().homeTeam.getImagePath();
-        string awayImagePath = TeamManager.GetInstance().awayTeam.getImagePath();
+        string homeImagePath = "";
+        string awayImagePath = "";
+        
+        GameType gameType = GameTypeManager.GetInstance().type;
+        if(gameType == GameType.QuickMatch)
+        {
+            homeImagePath = TeamManager.GetInstance().homeTeam.getImagePath();
+            awayImagePath = TeamManager.GetInstance().awayTeam.getImagePath();
+        }
+        else if(gameType == GameType.Tournament)
+        {
+            homeImagePath = TournamentManager.GetInstance().playerTeam.getImagePath();
+            awayImagePath = TournamentManager.GetInstance().oponent.getImagePath();
+        }
+
         Sprite homeImage = Resources.Load<Sprite>(homeImagePath);
         Sprite awayImage = Resources.Load<Sprite>(awayImagePath);
         GameObject.Find("HomeTeam").GetComponent<Image>().sprite = homeImage;

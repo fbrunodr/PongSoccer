@@ -2,12 +2,12 @@ namespace FieldNamespace{
 class FieldManager
 {
     public Field field;
-    public string time;
+    public TimeOfMatch time;
 
     private FieldManager()
     {
         field = new Field("neighborhood_field");
-        time = "Noon";
+        time = TimeOfMatch.Noon;
     }
 
     private static FieldManager _instance;

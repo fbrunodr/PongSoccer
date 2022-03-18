@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TeamNamespace;
+using GameTypeNamespace;
+using TournamentNamespace;
 
 public class PlayersImages : MonoBehaviour
 {
@@ -10,8 +12,20 @@ public class PlayersImages : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        string homeMaterialPath = TeamManager.GetInstance().homeTeam.getMaterialPath();
-        string awayMaterialPath = TeamManager.GetInstance().awayTeam.getMaterialPath();
+        string homeMaterialPath = "";
+        string awayMaterialPath = "";
+        
+        GameType gameType = GameTypeManager.GetInstance().type;
+        if(gameType == GameType.QuickMatch)
+        {
+            homeMaterialPath = TeamManager.GetInstance().homeTeam.getMaterialPath();
+            awayMaterialPath = TeamManager.GetInstance().awayTeam.getMaterialPath();
+        }
+        else if(gameType == GameType.Tournament)
+        {
+            homeMaterialPath = TournamentManager.GetInstance().playerTeam.getMaterialPath();
+            awayMaterialPath = TournamentManager.GetInstance().oponent.getMaterialPath();
+        }
 
         Material homeMaterial = Resources.Load<Material>(homeMaterialPath);
         Material awayMaterial = Resources.Load<Material>(awayMaterialPath);

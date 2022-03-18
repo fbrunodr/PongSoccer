@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using TeamNamespace;
+using UnityEngine.SceneManagement;
 using TournamentNamespace;
+using GameTypeNamespace;
 
 public class GroupUI : MonoBehaviour
 {
@@ -36,10 +37,10 @@ public class GroupUI : MonoBehaviour
 
             teamsSorted.Add(letter, teamsOfThisGroup);
 
-            for(int i = 3; i < 7; i++)
+            for(int i = 1; i <= 4; i++)
             {
-                TeamDataOnGroupPhase teamOfThisGroup = teamsOfThisGroup[i-3];
-                GameObject teamUI = group.GetChild(i).gameObject;
+                TeamDataOnGroupPhase teamOfThisGroup = teamsOfThisGroup[i-1]; // mind 0 indexing
+                GameObject teamUI = group.Find(i.ToString()).gameObject;
                 Sprite teamImg = Resources.Load<Sprite>(teamOfThisGroup.team.getImagePath());
                 teamUI.transform.Find("Image").GetComponent<Image>().sprite = teamImg;
                 teamUI.transform.Find("MP").GetComponent<Text>().text = teamOfThisGroup.matchesPlayed.ToString();
@@ -51,5 +52,12 @@ public class GroupUI : MonoBehaviour
                 teamUI.transform.Find("Pts").GetComponent<Text>().text = teamOfThisGroup.points.ToString();
             }
         }
+    }
+
+    public void play()
+    {
+        TournamentManager.GetInstance().simulateRound();
+        GameTypeManager.GetInstance().type = GameType.Tournament;
+        SceneManager.LoadScene("StandardMatch");
     }
 }

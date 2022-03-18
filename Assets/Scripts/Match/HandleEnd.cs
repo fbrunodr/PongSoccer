@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.Events;
 using WinConditionNamespace;
+using GameTypeNamespace;
+using TournamentNamespace;
 
 public class HandleEnd : MonoBehaviour
 {
@@ -20,8 +20,16 @@ public class HandleEnd : MonoBehaviour
     {
         endGamePanel = GameObject.Find("EndGamePanel");
         endGamePanel.SetActive(false);
-        Time.timeScale = 1;
-        mode = WinConditionManager.GetInstance().mode;
+        Time.timeScale = 1;        
+        
+        WinCondition.Mode mode = WinCondition.Mode.Time;
+
+        GameType gameType = GameTypeManager.GetInstance().type;
+        if(gameType == GameType.QuickMatch)
+            mode = WinConditionManager.GetInstance().mode;
+        else if(gameType == GameType.Tournament)
+            mode = TournamentManager.GetInstance().mode;
+
         goalHandler = GameObject.Find("Game").GetComponent<GoalHandler>();
         timeHandler = GameObject.Find("Game").GetComponent<TimeHandler>();
     }

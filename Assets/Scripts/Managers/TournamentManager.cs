@@ -7,17 +7,21 @@ using FieldNamespace;
 using TeamNamespace;
 using DifficutiesNamespace;
 using WinConditionNamespace;
+using AInamespace;
+using Utils;
 
 namespace TournamentNamespace{
 public class TournamentManager
 {
     public Team playerTeam;
+    public Team oponent;
     public Field field;
     public WinCondition.Mode mode;
     public int goalsToWin;
     public int timeToEnd;
     public Dictionary<string, int>  difficulties;
     public SortedDictionary<(char, int), TeamDataOnGroupPhase> teamsDataOnGroupPhase;
+    private int roundsPlayed;
 
     private string tournamentDirectory;
 
@@ -30,6 +34,8 @@ public class TournamentManager
         timeToEnd = 60;
         difficulties = new Dictionary<string, int>();
         teamsDataOnGroupPhase = new SortedDictionary<(char, int), TeamDataOnGroupPhase>();
+        roundsPlayed = 0;
+        oponent = null;
         tournamentDirectory = Path.Combine(Application.persistentDataPath, "Tournament");
     }
 
@@ -122,9 +128,10 @@ public class TournamentManager
         saveTournamentSettings();
         saveTournamentDifficulties();
         saveGroupsData();
+        saveRoundsData();
     }
 
-    public void createTournamentDirectoryIfNone()
+    private void createTournamentDirectoryIfNone()
     {
         if(!Directory.Exists(tournamentDirectory))
         {
@@ -132,7 +139,7 @@ public class TournamentManager
         }
     }
 
-    public void saveTournamentSettings()
+    private void saveTournamentSettings()
     {
         createTournamentDirectoryIfNone();
 
@@ -146,7 +153,7 @@ public class TournamentManager
         File.WriteAllText(tournamentSettings, settings);
     }
 
-    public void saveTournamentDifficulties()
+    private void saveTournamentDifficulties()
     {
         createTournamentDirectoryIfNone();
 
@@ -165,7 +172,7 @@ public class TournamentManager
         File.WriteAllText(tournamentDifficultiesPath, tournamentDifficultiesData);
     }
 
-    public void saveGroupsData()
+    private void saveGroupsData()
     {
         createTournamentDirectoryIfNone();
 
@@ -186,6 +193,111 @@ public class TournamentManager
         tournamentGroupsData = tournamentGroupsData.Remove(tournamentGroupsData.Length - 1);
 
         File.WriteAllText(tournamentGroupsPath, tournamentGroupsData);
+    }
+
+    private void saveRoundsData()
+    {
+        createTournamentDirectoryIfNone();
+
+        string tournamentRoundPath = Path.Combine(tournamentDirectory, "groups.txt");
+        string tournamentRoundData = "";
+
+        tournamentRoundData += roundsPlayed.ToString() + "\n";
+        File.WriteAllText(tournamentRoundPath, tournamentRoundData);
+    }
+
+    public void simulateRound()
+    {
+        if(isOnGroupPhase())
+            simulateGroupRound();
+        
+        saveRoundsData();
+    }
+
+    public bool isOnGroupPhase()
+    {
+        return roundsPlayed < 3;
+    }
+
+    public TimeOfMatch getTimeOfMatch()
+    {
+        return TimeOfMatch.Evening;
+    }
+
+    private void simulateGroupRound()
+    {
+        int currentRound = roundsPlayed + 1;
+        List<(int, int)> matches = RoundRobin.generateMatches(4, currentRound);
+
+        for(int i = 0; i < 8; i++)
+        {
+            char group = ((char)('A' + i));
+            foreach( (int idxA, int idxB) in matches )
+            {
+                TeamDataOnGroupPhase firstTeamData = teamsDataOnGroupPhase[(group, idxA)];
+                TeamDataOnGroupPhase secondTeamData = teamsDataOnGroupPhase[(group, idxB)];
+
+                if(firstTeamData.team.getName() == playerTeam.getName() )
+                {
+                    oponent = secondTeamData.team;
+                    continue;
+                }
+                
+                if(secondTeamData.team.getName() == playerTeam.getName() )
+                {
+                    oponent = firstTeamData.team;
+                    continue;
+                }
+
+                firstTeamData.matchesPlayed++;
+                secondTeamData.matchesPlayed++;
+
+                int firstTeamDifficulty = difficulties[firstTeamData.team.getName()];
+                int secondTeamDifficulty = difficulties[secondTeamData.team.getName()];
+
+                int endCondition = 0;
+                if(mode == WinCondition.Mode.Goals)
+                    endCondition = goalsToWin;
+                else
+                    endCondition = timeToEnd;
+                
+                (int firstTeamGoals, int secondTeamGoals) = new SimulateMatch(mode, endCondition).simulate(firstTeamDifficulty, secondTeamDifficulty);
+                
+                firstTeamData.goalsFor += firstTeamGoals;
+                secondTeamData.goalsFor += secondTeamGoals;
+
+                firstTeamData.goalsAgainst += secondTeamGoals;
+                secondTeamData.goalsAgainst += firstTeamGoals;
+
+                firstTeamData.goalDifference += (firstTeamGoals - secondTeamGoals);
+                secondTeamData.goalDifference += (secondTeamGoals - firstTeamGoals);
+
+                if(firstTeamGoals > secondTeamGoals)
+                {
+                    firstTeamData.wins++;
+                    secondTeamData.losses++;
+
+                    firstTeamData.points += 3;
+                }
+                else if(secondTeamGoals > firstTeamGoals)
+                {
+                    secondTeamData.wins++;
+                    firstTeamData.losses++;
+
+                    secondTeamData.points += 3;
+                }
+                else
+                {
+                    firstTeamData.draws++;
+                    secondTeamData.draws++;
+
+                    firstTeamData.points += 1;
+                    secondTeamData.points += 1;
+                }
+            }
+        }
+
+        saveGroupsData();
     }
 
     private static TournamentManager _instance;

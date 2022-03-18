@@ -4,6 +4,8 @@ using UnityEngine;
 using AInamespace;
 using DifficutiesNamespace;
 using TeamNamespace;
+using GameTypeNamespace;
+using TournamentNamespace;
 
 public class AI4x4player : MonoBehaviour
 {
@@ -33,7 +35,14 @@ public class AI4x4player : MonoBehaviour
 
         GameObject ball = GameObject.Find("Ball");
 
-        string aiTeamName = TeamManager.GetInstance().awayTeam.getName();
+        string aiTeamName = ""; 
+
+        GameType gameType = GameTypeManager.GetInstance().type;
+        if(gameType == GameType.QuickMatch)
+            aiTeamName = TeamManager.GetInstance().awayTeam.getName();
+        else if(gameType == GameType.Tournament)
+            aiTeamName = TournamentManager.GetInstance().oponent.getName();
+
         int aiTeamDifficult = DifficutiesManager.GetInstance().difficulties[aiTeamName];
         
         ai = new AI4x4(players, oponents, ball, aiTeamDifficult);
